@@ -16,8 +16,6 @@ public class GanhosService {
     private GanhosRepository ganhoRepository;
 
     public void inserir_movimentacao_ganho(Long id_user, String desc_ganho, float valor, Integer id_categoria, int auto_guardar, Integer id_cofre){
-        System.out.printf("\n\nid_user: %d, desc_ganho: %s, valor: %f, id_categoria: %d, auto_guardar: %s, id_cofre: %d\n\n", id_user, desc_ganho, valor, id_categoria, auto_guardar, id_cofre);
-
         BigDecimal valor_formatado = new BigDecimal(Float.toString(valor));
         valor_formatado = valor_formatado.setScale(2, RoundingMode.HALF_UP);
 
