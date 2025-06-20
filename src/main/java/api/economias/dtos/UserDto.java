@@ -1,6 +1,10 @@
 package api.economias.dtos;
 
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +14,7 @@ import lombok.Setter;
 
 
 @Entity
-public class Usuarios {
+public class UserDto implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +27,11 @@ public class Usuarios {
 
     @Getter
     @Setter
-    private float media_ganho;
+    @JsonProperty("media_ganho")
+    private double mediaGanho;
 
     @Getter
     @Setter
-    private float media_gasto;
+    @JsonProperty("media_gasto")
+    private double mediaGasto;
 }

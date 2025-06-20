@@ -1,5 +1,7 @@
 package api.economias.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,7 @@ import lombok.Setter;
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
             name= "valor",
-            type= Float.class
+            type= Double.class
         ),
         // Id_categoria 
         @StoredProcedureParameter(
@@ -61,25 +63,30 @@ public class GanhosDto {
     private Long id;
 
     @Getter
-    private Long id_user;
+    @JsonProperty("id_user")
+    private Long idUser;
 
     @Getter
     @Setter
-    private String desc_ganho;
+    @JsonProperty("desc_ganho")
+    private String descGanho;
     
     @Getter
     @Setter
-    private float valor;
+    private double valor;
     
     @Getter
     @Setter
-    private Integer id_categoria;
+    @JsonProperty("id_categoria")
+    private Long idCategoria;
     
     @Getter
     @Setter
-    private int auto_guardar;
+    @JsonProperty("auto_guardar")
+    private int autoGuardar;
     
     @Getter
     @Setter
-    private Integer id_cofre;
+    @JsonProperty("id_cofre")
+    private Integer idCofre;
 }
