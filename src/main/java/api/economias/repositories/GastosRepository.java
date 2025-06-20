@@ -12,7 +12,7 @@ public interface GastosRepository extends JpaRepository<GastosDto, Long> {
     void inserir_movimento_gasto(
         @Param("id_user") long id_user,
         @Param("desc_gasto") String desc_gasto,
-        @Param("valor") double Valor,
+        @Param("valor") double valor,
         @Param("id_categoria") Integer id_categoria
     );
 }
