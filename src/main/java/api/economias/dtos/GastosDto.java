@@ -64,5 +64,5 @@ public class GastosDto {
     @Getter
     @Setter
     @JsonProperty("id_categoria")
-    private Integer idCategoria;
+    private Long idCategoria;
 }

@@ -1,5 +1,7 @@
 package api.economias.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,9 @@ public class GastosService{
 
     public void inserir_movimento_gasto(GastosDto body){
         gastosRepository.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor(), body.getIdCategoria());
+    }
+
+    public List<Object> pesquisar_categoria(Long idUser, Long idCategoria){
+        return gastosRepository.procurarPorCategoria(idUser, idCategoria);
     }
 }

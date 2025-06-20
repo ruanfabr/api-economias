@@ -21,6 +21,6 @@ public class GanhosService {
     }
     
     public List<Object> pesquisar_categoria(Long idUser, Long idCategoria){
-        return ganhoRepository.procurarPorCategorias(idUser, idCategoria);
+        return ganhoRepository.procurarPorCategoria(idUser, idCategoria);
     }
 }

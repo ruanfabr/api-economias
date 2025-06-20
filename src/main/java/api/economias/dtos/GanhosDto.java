@@ -88,5 +88,5 @@ public class GanhosDto {
     @Getter
     @Setter
     @JsonProperty("id_cofre")
-    private Integer idCofre;
+    private Long idCofre;
 }

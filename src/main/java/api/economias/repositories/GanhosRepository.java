@@ -13,14 +13,15 @@ import api.economias.dtos.GanhosDto;
 public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
 
     @Query(value= """
-        select tab1.id, desc_ganho, valor, auto_guardar, dt_movimentacao
-        from dbo.Ganhos tab1
-        inner join dbo.Historico tab2 on tab1.id = tab2.id_movimentacao
-        where tab2.id_user = :id_user
-        and tab1.id_categoria = :id_categoria
-        and tab2.tipo_movimentacao = 'E'
+    SELECT 
+    tab1.id, desc_ganho, valor, auto_guardar, dt_movimentacao
+    FROM dbo.Ganhos tab1
+    INNER join dbo.Historico tab2 ON tab1.id = tab2.id_movimentacao
+    WHERE tab2.id_user = :id_user
+    AND tab1.id_categoria = :id_categoria
+    AND tab2.tipo_movimentacao = 'E'
     """, nativeQuery= true)
-    List<Object> procurarPorCategorias(@Param("id_user") Long idUser, @Param("id_categoria") Long idCategoria);
+    List<Object> procurarPorCategoria(@Param("id_user") Long idUser, @Param("id_categoria") Long idCategoria);
     
     @Procedure(name= "inserirGanho")
     void inserir_movimento_ganho(
@@ -29,6 +30,6 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
         @Param("valor") double valor,
         @Param("id_categoria") Long id_categoria,
         @Param("auto_guardar") int auto_guardar,
-        @Param("id_cofre") Integer id_cofre
+        @Param("id_cofre") Long id_cofre
     );
 }
