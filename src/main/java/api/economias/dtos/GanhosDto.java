@@ -9,10 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedStoredProcedureQuery;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureParameter;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name="Ganhos")
 @NamedStoredProcedureQuery(
     name = "inserirGanho",
     procedureName= "economias..Gerar_movimento_entrada",
@@ -35,12 +37,6 @@ import lombok.Setter;
             name= "valor",
             type= Double.class
         ),
-        // Id_categoria 
-        @StoredProcedureParameter(
-            mode= ParameterMode.IN,
-            name= "id_categoria",
-            type= Integer.class
-        ),
         // Auto_guardar
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
@@ -54,6 +50,37 @@ import lombok.Setter;
             type= Integer.class
         )
         }
+)
+@NamedStoredProcedureQuery(
+    name= "alterarMovimentacaoGanho",
+    procedureName= "alterar_dado_movimentacao",
+    parameters= {
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_movimentacao",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_user",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "tipo_movimentacao",
+            type= Character.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "valor",
+            type= Double.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "descricao_movimentacao",
+            type= String.class
+        )
+    }
 )
 public class GanhosDto {
     
@@ -73,12 +100,7 @@ public class GanhosDto {
     
     @Getter
     @Setter
-    private double valor;
-    
-    @Getter
-    @Setter
-    @JsonProperty("id_categoria")
-    private Long idCategoria;
+    private Double valor;
     
     @Getter
     @Setter

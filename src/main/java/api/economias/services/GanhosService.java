@@ -17,10 +17,14 @@ public class GanhosService {
 
 
     public void inserir_movimentacao_ganho(GanhosDto body){
-        ganhoRepository.inserir_movimento_ganho(body.getIdUser(), body.getDescGanho(), body.getValor(), body.getIdCategoria(), body.getAutoGuardar(), body.getIdCofre());
+        ganhoRepository.inserir_movimento_ganho(body.getIdUser(), body.getDescGanho(), body.getValor(), body.getAutoGuardar(), body.getIdCofre());
     }
     
-    public List<Object> pesquisar_categoria(Long idUser, Long idCategoria){
-        return ganhoRepository.procurarPorCategoria(idUser, idCategoria);
+    public List<Object> pesquisar_desc_ganho(Long idUser, String descGanho){
+        return ganhoRepository.procurarPorDescGanho(idUser, descGanho);
+    }
+
+    public void alterar_dado_movimentacao(Long idUser, GanhosDto body){
+        ganhoRepository.alterar_dado_movimentacao(body.getId(), idUser, 'E', body.getValor(), body.getDescGanho());
     }
 }
