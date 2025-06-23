@@ -24,15 +24,6 @@ public class GastosService{
     }
 
     public void alterar_dado_movimentacao(Long idUser, GastosDto body){
-        System.out.printf("\n" + body.getId() + "\n" + idUser + "\n" + 'S' + "\n" + body.getValor() + "\n" + body.getDescGasto());
-
-        try {
-            
-            gastosRepository.alterar_dado_movimentacao(body.getId(), idUser, 'S', body.getValor(), body.getDescGasto());
-
-        } catch (Exception e) {
-            System.out.printf("deu 2\n" + e);
-            
-        }
+        gastosRepository.alterar_dado_movimentacao(body.getId(), idUser, 'S', body.getValor(), body.getDescGasto());
     }
 }

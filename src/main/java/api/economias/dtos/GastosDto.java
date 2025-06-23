@@ -68,6 +68,27 @@ import lombok.Setter;
         )
     }
 )
+@NamedStoredProcedureQuery(
+    name= "removerMovimentoGasto",
+    procedureName= "Remover_movimento",
+    parameters= {
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_movimentacao",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_user",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "tipo_movimentacao",
+            type= Character.class
+        )
+    }
+)
 public class GastosDto {
 
     @Id
