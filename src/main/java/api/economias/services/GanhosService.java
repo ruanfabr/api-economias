@@ -14,6 +14,7 @@ public class GanhosService {
     
     @Autowired
     private GanhosRepository ganhoRepository;
+    private char tipoMovimentacao = 'E';
 
 
     public void inserir_movimentacao_ganho(GanhosDto body){
@@ -25,6 +26,10 @@ public class GanhosService {
     }
 
     public void alterar_dado_movimentacao(Long idUser, GanhosDto body){
-        ganhoRepository.alterar_dado_movimentacao(body.getId(), idUser, 'E', body.getValor(), body.getDescGanho());
+        ganhoRepository.alterar_dado_movimentacao(body.getId(), idUser, tipoMovimentacao, body.getValor(), body.getDescGanho());
+    }
+
+    public void remover_movimento_entrada(Long idUser, GanhosDto body){
+        ganhoRepository.remover_movimento_ganho(body.getId(), idUser, tipoMovimentacao);
     }
 }

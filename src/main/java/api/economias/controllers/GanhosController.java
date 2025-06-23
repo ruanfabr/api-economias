@@ -35,9 +35,16 @@ public class GanhosController {
         return ResponseEntity.status(HttpStatus.FOUND).body(resultado_pesquisa);
     }
 
-    @PostMapping("/alterarMovimentacao/{idUser}")
+    @PostMapping("/alterar/{idUser}")
     public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GanhosDto body){
         ganhosService.alterar_dado_movimentacao(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
+    }
+
+    @PostMapping("/remover/{idUser}")
+    public ResponseEntity<String> remover_movimento_ganho(@PathVariable Long idUser, @RequestBody GanhosDto body){
+        ganhosService.remover_movimento_entrada(idUser, body);
 
         return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
     }

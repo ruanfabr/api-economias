@@ -39,4 +39,11 @@ public interface GastosRepository extends JpaRepository<GastosDto, Long> {
         @Param("valor") Double valor,
         @Param("descricao_movimentacao") String descGasto
     );
+
+    @Procedure(name= "removerMovimentoGasto")
+    void remover_movimento_gasto(
+        @Param("id_movimentacao") Long id,
+        @Param("id_user") Long idUser,
+        @Param("tipo_movimentacao")  char tipoMovimentacao
+    );
 }

@@ -42,4 +42,11 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
         @Param("valor") Double valor,
         @Param("descricao_movimentacao") String descGanho
     );
+
+    @Procedure(name= "removerMovimentoGanho")
+    void remover_movimento_ganho(
+        @Param("id_movimentacao") Long id,
+        @Param("id_user") Long idUser,
+        @Param("tipo_movimentacao")  char tipoMovimentacao
+    );
 }

@@ -37,10 +37,17 @@ public class GastosController {
         return ResponseEntity.status(HttpStatus.FOUND).body(resultado_pesquisa);
     }
 
-    @PostMapping("/alterarMovimentacao/{idUser}")
+    @PostMapping("/alterar/{idUser}")
     public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GastosDto body){
         gastosService.alterar_dado_movimentacao(idUser, body);
 
         return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
+    }
+
+    @PostMapping("/remover/{idUser}")
+    public ResponseEntity<String> remover_movimento_gasto(@PathVariable Long idUser, @RequestBody GastosDto body){
+        gastosService.remover_movimento_gasto(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Movimentaçãp excluída com sucesso!");
     }
 }
