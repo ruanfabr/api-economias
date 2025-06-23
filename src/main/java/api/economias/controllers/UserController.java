@@ -15,7 +15,7 @@ import api.economias.services.UsuariosService;
 
 @RestController
 @RequestMapping
-public class User {
+public class UserController {
 
     @Autowired
     private UsuariosService usuariosService;

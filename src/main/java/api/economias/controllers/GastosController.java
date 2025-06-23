@@ -1,6 +1,5 @@
 package api.economias.controllers;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +23,31 @@ public class GastosController {
     @Autowired
     private GastosService gastosService;
     
-    @PostMapping("inserir_gasto")
+    @PostMapping("/inserir_gasto")
     public ResponseEntity<String> inserirGasto(@RequestBody GastosDto body){
         gastosService.inserir_movimento_gasto(body);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Gasto inserido com Sucesso!");
     }
     
-    @GetMapping("/categoria/{id_user}/{id_categoria}")
-    public ResponseEntity<List<Object>> pesquisarPorCategoria(@PathVariable Long id_user, @PathVariable Long id_categoria ){
-        List<Object> resultado_pesquisa = gastosService.pesquisar_categoria(id_user, id_categoria);
+    @GetMapping("/categoria/{id_user}")
+    public ResponseEntity<List<Object>> pesquisarPorCategoria(@PathVariable Long id_user, @RequestBody String desc_gasto ){
+        List<Object> resultado_pesquisa = gastosService.pesquisarDesc(id_user, desc_gasto);
 
         return ResponseEntity.status(HttpStatus.FOUND).body(resultado_pesquisa);
+    }
+
+    @PostMapping("/alterar/{idUser}")
+    public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GastosDto body){
+        gastosService.alterar_dado_movimentacao(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
+    }
+
+    @PostMapping("/remover/{idUser}")
+    public ResponseEntity<String> remover_movimento_gasto(@PathVariable Long idUser, @RequestBody GastosDto body){
+        gastosService.remover_movimento_gasto(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Movimentaçãp excluída com sucesso!");
     }
 }

@@ -9,10 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedStoredProcedureQuery;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureParameter;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name="Gastos")
 @NamedStoredProcedureQuery(
     name= "inserirGasto",
     procedureName= "economias..Gerar_movimento_saida",
@@ -32,11 +34,58 @@ import lombok.Setter;
             mode= ParameterMode.IN,
             name= "valor",
             type= Double.class
+        )
+        }
+)
+@NamedStoredProcedureQuery(
+    name= "alterarMovimentacaoGasto",
+    procedureName= "alterar_dado_movimentacao",
+    parameters= {
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_movimentacao",
+            type= Long.class
         ),
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
-            name= "id_categoria",
-            type= Integer.class
+            name= "id_user",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "tipo_movimentacao",
+            type= Character.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "valor",
+            type= Double.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "descricao_movimentacao",
+            type= String.class
+        )
+    }
+)
+@NamedStoredProcedureQuery(
+    name= "removerMovimentoGasto",
+    procedureName= "Remover_movimento",
+    parameters= {
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_movimentacao",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_user",
+            type= Long.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "tipo_movimentacao",
+            type= Character.class
         )
     }
 )
@@ -48,7 +97,6 @@ public class GastosDto {
     private Long id;
 
     @Getter
-    @Setter
     @JsonProperty("id_user")
     private Long idUser;
 
@@ -60,9 +108,4 @@ public class GastosDto {
     @Getter
     @Setter
     private double valor;
-
-    @Getter
-    @Setter
-    @JsonProperty("id_categoria")
-    private Long idCategoria;
 }

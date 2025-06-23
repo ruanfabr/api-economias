@@ -28,10 +28,24 @@ public class GanhosController {
         return ResponseEntity.status(HttpStatus.OK).body("Inserido com Sucesso!");
     }
 
-    @GetMapping("/categoria/{id_user}/{id_categoria}")
-    public ResponseEntity<List<Object>> pesquisar_categoria(@PathVariable Long id_user, @PathVariable Long id_categoria){
-        List<Object> resultado_pesquisa  = ganhosService.pesquisar_categoria(id_user, id_categoria);
+    @GetMapping("/categoria/{id_user}")
+    public ResponseEntity<List<Object>> pesquisarDesc(@PathVariable Long id_user, @RequestBody String desc_ganho){
+        List<Object> resultado_pesquisa  = ganhosService.pesquisar_desc_ganho(id_user, desc_ganho);
 
         return ResponseEntity.status(HttpStatus.FOUND).body(resultado_pesquisa);
+    }
+
+    @PostMapping("/alterar/{idUser}")
+    public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GanhosDto body){
+        ganhosService.alterar_dado_movimentacao(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
+    }
+
+    @PostMapping("/remover/{idUser}")
+    public ResponseEntity<String> remover_movimento_ganho(@PathVariable Long idUser, @RequestBody GanhosDto body){
+        ganhosService.remover_movimento_entrada(idUser, body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
     }
 }
