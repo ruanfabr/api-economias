@@ -14,6 +14,8 @@ public class GanhosService {
     
     @Autowired
     private GanhosRepository repositorio;
+    private GanhosRepository ganhoRepository;
+    private final char tipoMovimentacao = 'E';
 
 
     public void inserir_movimentacao_ganho(GanhosDto body){
@@ -21,7 +23,6 @@ public class GanhosService {
     }
     
     public List<Object> pesquisar_desc_ganho(Long idUser, String descGanho){
-        System.out.print("\n" + "saporra ta aqui" + "\n" + idUser + "\n" + descGanho + "\n");
         return repositorio.procurarPorDescGanho(idUser, descGanho);
     }
 
@@ -31,5 +32,10 @@ public class GanhosService {
 
     public List<GanhosDto.EntradaMesAtual> ver_entradas_mes_atual(Long id_user){
         return repositorio.ver_entradas_mes_atual(id_user);
+
+    }
+    
+    public void remover_movimento_entrada(Long idUser, GanhosDto body){
+        ganhoRepository.remover_movimento_ganho(body.getId(), idUser, tipoMovimentacao);
     }
 }

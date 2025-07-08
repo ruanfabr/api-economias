@@ -54,4 +54,11 @@ public interface GastosRepository extends JpaRepository<GastosDto, Long> {
     WHERE id_user = :id_user
     """, nativeQuery=true)
     List<GastosDto.SaidaMesAtual> ver_saidas_mes_atual(@Param("id_user") Long id_user);
+    
+    @Procedure(name= "removerMovimentoGasto")
+    void remover_movimento_gasto(
+        @Param("id_movimentacao") Long id,
+        @Param("id_user") Long idUser,
+        @Param("tipo_movimentacao")  char tipoMovimentacao
+    );
 }

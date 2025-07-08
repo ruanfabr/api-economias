@@ -1,6 +1,5 @@
 package api.economias.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class GanhosController {
         return ResponseEntity.status(HttpStatus.OK).body(resultado_pesquisa);
     }
 
-    @PostMapping("/alterarMovimentacao/{idUser}")
+    @PostMapping("/alterar/{idUser}")
     public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GanhosDto body){
         ganhosService.alterar_dado_movimentacao(idUser, body);
 

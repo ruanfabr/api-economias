@@ -1,7 +1,5 @@
 package api.economias.repositories;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -55,4 +53,11 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
     FROM [economias].[dbo].[entradas_mes_atual] WHERE id_user = :id_user
     """, nativeQuery= true)
     List<GanhosDto.EntradaMesAtual> ver_entradas_mes_atual(@Param("id_user") Long idUser);
+    
+    @Procedure(name= "removerMovimentoGanho")
+    void remover_movimento_ganho(
+        @Param("id_movimentacao") Long id,
+        @Param("id_user") Long idUser,
+        @Param("tipo_movimentacao")  char tipoMovimentacao
+    );
 }

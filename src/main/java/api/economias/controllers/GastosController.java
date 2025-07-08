@@ -39,7 +39,7 @@ public class GastosController {
         return ResponseEntity.status(HttpStatus.FOUND).body(resultado_pesquisa);
     }
 
-    @PostMapping("/alterarMovimentacao/{idUser}")
+    @PostMapping("/alterar/{idUser}")
     public ResponseEntity<String> alterar_dados_movimentacao(@PathVariable Long idUser, @RequestBody GastosDto body){
         gastosService.alterar_dado_movimentacao(idUser, body);
 
