@@ -1,5 +1,7 @@
 package api.economias.repositories;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,8 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import api.economias.dtos.GanhosDto;
-
-
 @Repository
 public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
 
@@ -20,10 +20,10 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
     FROM dbo.Ganhos tab1
     INNER join dbo.Historico tab2 ON tab1.id = tab2.id_movimentacao
     WHERE tab2.id_user = :id_user
-    AND tab1.desc_ganho = :desc_ganho
+    AND tab1.id_categoria = :id_categoria
     AND tab2.tipo_movimentacao = 'E'
     """, nativeQuery= true)
-    List<Object> procurarPorDescGanho(@Param("id_user") Long idUser, @Param("desc_ganho") String descGanho);
+    List<Object> procurarPorDescGanho(@Param("id_user") Long idUser, @Param("id_categoria") String id_categoria);
     
     @Procedure(name= "inserirGanho")
     void inserir_movimento_ganho(
@@ -31,7 +31,8 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
         @Param("desc_ganho") String desc_ganho,
         @Param("valor") double valor,
         @Param("auto_guardar") int auto_guardar,
-        @Param("id_cofre") Long id_cofre
+        @Param("id_cofre") Long id_cofre,
+        @Param("id_categoria") int id_categoria
     );
 
     @Procedure(name= "alterarMovimentacaoGanho")
@@ -42,4 +43,16 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
         @Param("valor") Double valor,
         @Param("descricao_movimentacao") String descGanho
     );
+
+    @Query(value="""
+    SELECT 
+    id as id,
+    desc_ganho as desc_ganho,
+    valor as valor,
+    id_cofre as id_cofre,
+    id_categoria as id_categorias,
+    dt_movimentacao as dt_movimentacao
+    FROM [economias].[dbo].[entradas_mes_atual] WHERE id_user = :id_user
+    """, nativeQuery= true)
+    List<GanhosDto.EntradaMesAtual> ver_entradas_mes_atual(@Param("id_user") Long idUser);
 }

@@ -15,6 +15,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name="Ganhos")
+@Getter
+@Setter
 @NamedStoredProcedureQuery(
     name = "inserirGanho",
     procedureName= "economias..Gerar_movimento_entrada",
@@ -48,9 +50,16 @@ import lombok.Setter;
             mode= ParameterMode.IN,
             name= "id_cofre",
             type= Integer.class
+        ),
+        // Id_categoria 
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_categoria",
+            type= Integer.class
         )
         }
 )
+
 @NamedStoredProcedureQuery(
     name= "alterarMovimentacaoGanho",
     procedureName= "alterar_dado_movimentacao",
@@ -86,29 +95,34 @@ public class GanhosDto {
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
-    @Getter
     @JsonProperty("id_user")
     private Long idUser;
 
-    @Getter
-    @Setter
     @JsonProperty("desc_ganho")
     private String descGanho;
     
-    @Getter
-    @Setter
     private Double valor;
     
-    @Getter
-    @Setter
     @JsonProperty("auto_guardar")
-    private int autoGuardar;
+    private Integer autoGuardar;
     
-    @Getter
-    @Setter
     @JsonProperty("id_cofre")
     private Long idCofre;
+
+    @JsonProperty("id_categoria")
+    private int idCategoria;
+
+    @JsonProperty("dt_movimentacao")
+    private String dtMovimentacao;
+
+    public interface EntradaMesAtual {
+        Long getId();
+        String getDesc_ganho();
+        Double getValor();
+        Long getId_cofre();
+        Integer getId_categoria();
+        String getDt_movimentacao();
+    }
 }

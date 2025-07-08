@@ -1,7 +1,10 @@
 package api.economias.dtos;
 
 
-import java.io.Serializable;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,24 +18,40 @@ import lombok.Setter;
 
 @Entity
 @Table(name="Usuarios")
-public class UserDto implements Serializable {
+@Getter
+@Setter
+// public class UserDto implements Serializable {
+public class UserDto implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
-    @Getter
-    @Setter
     private String nome;
 
-    @Getter
-    @Setter
+    private String senha;
+
     @JsonProperty("media_ganho")
     private double mediaGanho;
 
-    @Getter
-    @Setter
     @JsonProperty("media_gasto")
     private double mediaGasto;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+        // throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        return nome;
+        // throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
 }

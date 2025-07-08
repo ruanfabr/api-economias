@@ -13,17 +13,21 @@ import api.economias.repositories.GastosRepository;
 public class GastosService{
 
     @Autowired
-    private GastosRepository gastosRepository;
+    private GastosRepository repositorio;
 
     public void inserir_movimento_gasto(GastosDto body){
-        gastosRepository.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor());
+        repositorio.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor(), body.getPago(), body.getIdCategoria());
     }
 
     public List<Object> pesquisarDesc(Long idUser, String descGasto){
-        return gastosRepository.procurarPorCategoria(idUser, descGasto);
+        return repositorio.procurarPorCategoria(idUser, descGasto);
     }
 
     public void alterar_dado_movimentacao(Long idUser, GastosDto body){
-        gastosRepository.alterar_dado_movimentacao(body.getId(), idUser, 'S', body.getValor(), body.getDescGasto());
+        repositorio.alterar_dado_movimentacao(body.getId(), idUser, 'S', body.getValor(), body.getDescGasto());
+    }
+
+    public List<GastosDto.SaidaMesAtual> ver_saidas_mes_atual(Long idUser){
+        return repositorio.ver_saidas_mes_atual(idUser);
     }
 }
