@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import api.economias.services.GastosService;
 
 @RestController
 @RequestMapping("/gastos")
+@CrossOrigin(origins = "*")
 public class GastosController {
     
     @Autowired
@@ -44,10 +46,8 @@ public class GastosController {
         return ResponseEntity.status(HttpStatus.OK).body("Alterado com Sucesso!");
     }
 
-    @PostMapping("/remover/{idUser}")
-    public ResponseEntity<String> remover_movimento_gasto(@PathVariable Long idUser, @RequestBody GastosDto body){
-        gastosService.remover_movimento_gasto(idUser, body);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Movimentaçãp excluída com sucesso!");
+    @GetMapping("/saidas_mensal/{id_user}")
+    public ResponseEntity<List<GastosDto.SaidaMesAtual>> ver_saidas_mes_atual(@PathVariable Long id_user){
+        return ResponseEntity.status(HttpStatus.OK).body(gastosService.ver_saidas_mes_atual(id_user));
     }
 }
