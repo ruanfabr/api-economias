@@ -30,7 +30,7 @@ public interface GanhosRepository extends JpaRepository<GanhosDto, Long> {
         @Param("valor") double valor,
         @Param("auto_guardar") int auto_guardar,
         @Param("id_cofre") Long id_cofre,
-        @Param("id_categoria") int id_categoria
+        @Param("id_categoria") Integer id_categoria
     );
 
     @Procedure(name= "alterarMovimentacaoGanho")

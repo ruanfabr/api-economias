@@ -29,8 +29,9 @@ public interface GastosRepository extends JpaRepository<GastosDto, Long> {
         @Param("id_user") Long id_user,
         @Param("desc_gasto") String desc_gasto,
         @Param("valor") double valor,
-        @Param("pago") char pago,
-        @Param("id_categoria") int id_categoria
+        @Param("pago") int pago,
+        @Param("id_categoria") Integer id_categoria,
+        @Param("auto_guardar") Integer auto_guardar
     );
 
     @Procedure(name= "alterarMovimentacaoGasto")

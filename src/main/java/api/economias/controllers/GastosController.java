@@ -31,6 +31,13 @@ public class GastosController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Gasto inserido com Sucesso!");
     }
+
+    @PostMapping("/retirar_gasto")
+    public ResponseEntity<String> retirarGasto(@RequestBody GastosDto body){
+        gastosService.remover_movimento_gasto(body);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Sucesso");
+    }
     
     @GetMapping("/categoria/{id_user}")
     public ResponseEntity<List<Object>> pesquisarPorCategoria(@PathVariable Long id_user, @RequestBody String desc_gasto ){

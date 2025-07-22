@@ -93,7 +93,7 @@ import lombok.Setter;
 )
 @NamedStoredProcedureQuery(
     name= "removerMovimentoGanho",
-    procedureName= "Remover_movimento",
+    procedureName= "economias..Remover_movimento",
     parameters= {
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
@@ -133,7 +133,7 @@ public class GanhosDto {
     private Long idCofre;
 
     @JsonProperty("id_categoria")
-    private int idCategoria;
+    private Integer idCategoria;
 
     @JsonProperty("dt_movimentacao")
     private String dtMovimentacao;

@@ -30,6 +30,12 @@ public class GanhosController {
         return ResponseEntity.status(HttpStatus.OK).body("Inserido com Sucesso!");
     }
 
+    @PostMapping("/retirar_ganho")
+    public ResponseEntity<String> retirar_ganho(@RequestBody GanhosDto body){
+        ganhosService.remover_movimento_entrada(body);
+        return ResponseEntity.status(HttpStatus.OK).body("Sucesso");
+    }
+
     @GetMapping("/categoria/{id_user}/{id_categoria}")
     public ResponseEntity<List<Object>> pesquisarDesc(@PathVariable Long id_user, @PathVariable String id_categoria){
         List<Object> resultado_pesquisa  = ganhosService.pesquisar_desc_ganho(id_user, id_categoria);

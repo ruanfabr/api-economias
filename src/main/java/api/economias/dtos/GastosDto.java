@@ -40,7 +40,17 @@ import lombok.Setter;
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
             name= "pago",
-            type= Character.class
+            type= Integer.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "id_categoria",
+            type= Integer.class
+        ),
+        @StoredProcedureParameter(
+            mode= ParameterMode.IN,
+            name= "auto_guardar",
+            type= Integer.class
         )
         }
 )
@@ -77,7 +87,7 @@ import lombok.Setter;
 )
 @NamedStoredProcedureQuery(
     name= "removerMovimentoGasto",
-    procedureName= "Remover_movimento",
+    procedureName= "economias..Remover_movimento",
     parameters= {
         @StoredProcedureParameter(
             mode= ParameterMode.IN,
@@ -110,10 +120,13 @@ public class GastosDto {
     
     private double valor;
 
-    private char pago;
+    private int pago;
 
     @JsonProperty("id_categoria")
-    private int idCategoria;
+    private Integer idCategoria;
+
+    @JsonProperty("auto_guardar")
+    private Integer autoGuardar;
 
     public interface SaidaMesAtual {
         Long getId();

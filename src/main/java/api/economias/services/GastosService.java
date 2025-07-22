@@ -14,11 +14,18 @@ public class GastosService{
 
     @Autowired
     private GastosRepository repositorio;
-    private GastosRepository gastosRepository;
     private final char tipoMovimentacao = 'S';
 
     public void inserir_movimento_gasto(GastosDto body){
-        repositorio.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor(), body.getPago(), body.getIdCategoria());
+        System.out.print(
+                "id:\t" + body.getIdUser() + "\n" +
+                "desc_gasto:\t" + body.getDescGasto() + "\n" +
+                "valor:\t" + body.getValor() + "\n" +
+                "pago:\t" + body.getPago() + "\n" +
+                "idCategoria:\t" + body.getIdCategoria() + "\n" +
+                "autoGuardar:\t" + body.getAutoGuardar());
+        repositorio.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor(), body.getPago(),
+                body.getIdCategoria(), body.getAutoGuardar());
     }
 
     public List<Object> pesquisarDesc(Long idUser, String descGasto){
@@ -26,14 +33,14 @@ public class GastosService{
     }
 
     public void alterar_dado_movimentacao(Long idUser, GastosDto body){
-        repositorio.alterar_dado_movimentacao(body.getId(), idUser, 'S', body.getValor(), body.getDescGasto());
+        repositorio.alterar_dado_movimentacao(body.getId(), idUser, tipoMovimentacao, body.getValor(), body.getDescGasto());
     }
 
     public List<GastosDto.SaidaMesAtual> ver_saidas_mes_atual(Long idUser){
         return repositorio.ver_saidas_mes_atual(idUser);
     }
 
-    public void remover_movimento_gasto(Long idUser, GastosDto body){
-        gastosRepository.remover_movimento_gasto(body.getId(), idUser, tipoMovimentacao);
+    public void remover_movimento_gasto(GastosDto body){
+        repositorio.remover_movimento_gasto(body.getId(), body.getIdUser(), tipoMovimentacao);
     }
 }
