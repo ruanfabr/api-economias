@@ -17,13 +17,6 @@ public class GastosService{
     private final char tipoMovimentacao = 'S';
 
     public void inserir_movimento_gasto(GastosDto body){
-        System.out.print(
-                "id:\t" + body.getIdUser() + "\n" +
-                "desc_gasto:\t" + body.getDescGasto() + "\n" +
-                "valor:\t" + body.getValor() + "\n" +
-                "pago:\t" + body.getPago() + "\n" +
-                "idCategoria:\t" + body.getIdCategoria() + "\n" +
-                "autoGuardar:\t" + body.getAutoGuardar());
         repositorio.inserir_movimento_gasto(body.getIdUser(), body.getDescGasto(), body.getValor(), body.getPago(),
                 body.getIdCategoria(), body.getAutoGuardar());
     }
